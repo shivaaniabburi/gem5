@@ -152,8 +152,8 @@ class Mesh_XYZ(SimpleTopology):
                 for y in range(y_depth):
                     if (y + 1 < y_depth):
                         east_in = y + (x * y_depth) + (z * y_depth * x_depth)
-                        west_out = (y + 1) +
-                         (x * y_depth) + (z * y_depth * x_depth)
+                        west_out = (y + 1) +  (x * y_depth) 
+                        + (z * y_depth * x_depth)
                         int_links.append(IntLink(link_id=link_count,
                                                 src_node=routers[west_out],
                                                 dst_node=routers[east_in],
@@ -169,7 +169,7 @@ class Mesh_XYZ(SimpleTopology):
             for x in range(x_depth):
                 for y in range(y_depth):
                     if (x + 1 < x_depth):
-                        north_out = y + (x * y_depth)
+                        north_out = y +   (x * y_depth)
                          + (z * y_depth * x_depth)
                         south_in = y + 
                         ((x + 1) * y_depth) + (z * y_depth * x_depth)
@@ -188,10 +188,10 @@ class Mesh_XYZ(SimpleTopology):
             for x in range(x_depth):
                 for y in range(y_depth):
                     if (x + 1 < x_depth):
-                        north_in = y + 
-                        (x * y_depth) + (z * y_depth * x_depth)
-                        south_out = y + 
-                        ((x + 1) * y_depth) + (z * y_depth * x_depth)
+                        north_in = y + (x * y_depth) 
+                        + (z * y_depth * x_depth)
+                        south_out = y +  ((x + 1) * y_depth) 
+                        + (z * y_depth * x_depth)
                         int_links.append(IntLink(link_id=link_count,
                                                 src_node=routers[south_out],
                                                 dst_node=routers[north_in],
@@ -207,9 +207,9 @@ class Mesh_XYZ(SimpleTopology):
             for y in range(y_depth):
                 for x in range(x_depth):
                     if (z + 1 < z_depth):
-                        up_out = x + (y * x_depth) + (z * y_depth * x_depth)
-                        down_in = x + (y * x_depth)
-                         + ((z + 1) * y_depth * x_depth)
+                        up_out = x +  (y * x_depth) + 
+                        (z * y_depth * x_depth)
+                        down_in = x + (y * x_depth)+ ((z + 1) * y_depth * x_depth)
                         int_links.append(IntLink(link_id=link_count,
                                                 src_node=routers[up_out],
                                                 dst_node=routers[down_in],
@@ -225,9 +225,9 @@ class Mesh_XYZ(SimpleTopology):
             for y in range(y_depth):
                 for x in range(x_depth):
                     if (z + 1 < z_depth):
-                        up_in = x + (y * x_depth) + (z * y_depth * x_depth)
-                        down_out = x + (y * x_depth) + 
-                        ((z + 1) * y_depth * x_depth)
+                        up_in = x +  (y * x_depth) + 
+                        (z * y_depth * x_depth)
+                        down_out = x + (y * x_depth) + ((z + 1) * y_depth * x_depth)
                         int_links.append(IntLink(link_id=link_count,
                                                 src_node=routers[down_out],
                                                 dst_node=routers[up_in],
