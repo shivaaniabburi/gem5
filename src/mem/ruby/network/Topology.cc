@@ -91,6 +91,7 @@ Topology::Topology(uint32_t num_nodes, uint32_t num_routers,
     }
 
     // Internal Links
+    int c =0;
     for (std::vector<BasicIntLink*>::const_iterator i = int_links.begin();
          i != int_links.end(); ++i) {
         BasicIntLink *int_link = (*i);
@@ -107,8 +108,12 @@ Topology::Topology(uint32_t num_nodes, uint32_t num_routers,
         int dst = router_dst->params().router_id + 2*m_nodes;
 
         // create the internal uni-directional link from src to dst
+        c++;
         addLink(src, dst, int_link, src_outport, dst_inport);
+        
     }
+    
+    std::cout<< c << std::endl;
 }
 
 void
@@ -224,6 +229,7 @@ Topology::addLink(SwitchID src, SwitchID dest, BasicLink* link,
 
     std::pair<int, int> src_dest_pair;
     src_dest_pair.first = src;
+    std::cout<< src <<" " << dest << std::endl;
     src_dest_pair.second = dest;
     LinkEntry link_entry;
 

@@ -1,0 +1,12 @@
+Global frequency set at 1000000000000 ticks per second
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 22.0.0.2
+gem5 compiled Sep 11 2022 23:43:21
+gem5 started Sep 12 2022 09:18:44
+gem5 executing on shivaani-VirtualBox, pid 25815
+command line: ./build/NULL/gem5.opt configs/example/garnet_synth_traffic.py
+
+Exiting @ tick 1000 because Network Tester completed simCycles
+Shivaani

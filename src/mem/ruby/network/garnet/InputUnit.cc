@@ -170,6 +170,7 @@ InputUnit::resetStats()
         m_num_buffer_reads[j] = 0;
         m_num_buffer_writes[j] = 0;
     }
+    std::cout<<"Shivaani with .cc ";
 }
 
 } // namespace garnet

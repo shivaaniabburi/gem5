@@ -125,32 +125,20 @@ GarnetNetwork::init()
     m_topology_ptr->createLinks(this);
 	
     if (getNumRows() > 0 && getRoutingAlgorithm() == 2) { //if XYZ algorithm
-          std::cout<<"Using XYZ Routing Algorithm"<<std::endl;
-        m_num_rows = getNumRows();
-
-        m_z_depth = (m_routers.size() / m_num_rows) / m_num_rows;
-
-        m_num_cols = m_num_rows;
-
-        //display dimensions of router for user/debug
-        std::cout<<"router size: "<<m_routers.size()<<std::endl;
-        std::cout<<"m_num_rows: "<<m_num_rows<<std::endl;
-        std::cout<<"m_num_cols: "<<m_num_cols<<std::endl;
-        std::cout<<"m_z_depth: "<<m_z_depth<<std::endl;
-        // cout<<"\nATTENTION: coordinate format is now (z,y,x)\n"<<std::endl;
-        //m_num_rows = getNumRows();
         
-        //if (getZDepth()>0){
-          //  m_z_depth = getZDepth();
-        //} else {
-          //  m_z_depth = (m_routers.size() / m_num_rows) / m_num_rows;
-        //}
+        m_num_rows = getNumRows();
+        
+        if (getZDepth()>0){
+            m_z_depth = getZDepth();
+        } else {
+            m_z_depth = (m_routers.size() / m_num_rows) / m_num_rows;
+        }
 
-        //if (getNumCols()>0){
-          //  m_num_cols = getNumCols();
-        //} else {
-          //  m_num_cols = (m_routers.size() / m_num_rows) / m_z_depth;
-        //}
+        if (getNumCols()>0){
+            m_num_cols = getNumCols();
+        } else {
+            m_num_cols = (m_routers.size() / m_num_rows) / m_z_depth;
+        }
         
         //display dimensions of router for user/debug
         // cout<<"router size: "<<m_routers.size()<<endl;

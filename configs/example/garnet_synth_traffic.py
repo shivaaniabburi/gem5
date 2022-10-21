@@ -141,3 +141,4 @@ m5.instantiate()
 exit_event = m5.simulate(args.abs_max_tick)
 
 print('Exiting @ tick', m5.curTick(), 'because', exit_event.getCause())
+print("Shivaani")

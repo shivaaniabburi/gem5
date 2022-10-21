@@ -56,6 +56,14 @@ class RoutingUnit
     int outportCompute(RouteInfo route,
                       int inport,
                       PortDirection inport_dirn);
+    
+    //  int outportComputeXY(RouteInfo route,
+    //                   int inport,
+    //                   PortDirection inport_dirn);
+      
+    //    int outportComputeXYZ(RouteInfo route,
+    //                   int inport,
+    //                   PortDirection inport_dirn);
 
     // Topology-agnostic Routing Table based routing (default)
     void addRoute(std::vector<NetDest>& routing_table_entry);
@@ -72,7 +80,9 @@ class RoutingUnit
     int outportComputeXY(RouteInfo route,
                          int inport,
                          PortDirection inport_dirn);
-
+    int outportComputeXYZ(RouteInfo route,
+                         int inport,
+                         PortDirection inport_dirn);
     // Custom Routing Algorithm using Port Directions
     int outportComputeCustom(RouteInfo route,
                              int inport,

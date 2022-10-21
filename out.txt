@@ -1,0 +1,99 @@
+Global frequency set at 1000000000000 ticks per second
+0 32
+32 16
+1 33
+33 17
+2 34
+34 18
+3 35
+35 19
+4 36
+36 20
+5 37
+37 21
+6 38
+38 22
+7 39
+39 23
+8 32
+32 24
+9 33
+33 25
+10 34
+34 26
+11 35
+35 27
+12 36
+36 28
+13 37
+37 29
+14 38
+38 30
+15 39
+39 31
+32 33
+34 35
+36 37
+38 39
+33 32
+35 34
+37 36
+39 38
+32 34
+33 35
+36 38
+37 39
+34 32
+35 33
+38 36
+39 37
+32 36
+33 37
+34 38
+35 39
+36 32
+37 33
+38 34
+39 35
+24
+Using XYZ Routing Algorithm
+router size: 8
+m_num_rows: 2
+m_num_cols: 2
+m_z_depth: 2
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 22.0.0.2
+gem5 compiled Oct 19 2022 14:31:32
+gem5 started Oct 19 2022 14:34:45
+gem5 executing on shivaani-VirtualBox, pid 177756
+command line: ./build/NULL/gem5.opt configs/example/garnet_synth_traffic.py --num-cpus=8 --num-dirs=8 --network=garnet --topology=Mesh_XYZ --mesh-rows=2 --mesh-cols=2 --z-depth=2 --sim-cycles=100000 --synthetic=uniform_random --routing-algorithm=2 --single-sender-id=0 --single-dest-id=4 --injectionrate=0.2
+
+File: Mesh_XYZ.py
+2 2 2 8
+Total Number Routers:  8
+x_depth:  2
+y_depth:  2
+z_depth:  2
+
+NUM EAST-WEST LINKS =  4
+NUM WEST-EAST LINKS =  4
+NUM NORTH-SOUTH LINKS =  4
+NUM SOUTH-NORTH LINKS =  4
+NUM UP-DOWN LINKS =  4
+NUM DOWN-UP LINKS =  4
+TOTAL NUM LINKS =  24 
+
+Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc Shivaani with .cc This is route compute XYZ
+This is outport compute XYZ
+TESTING NORTH: 3
+TESTING SOUTH: 0
+TESTING EAST: 2
+TESTING WEST: 0
+TESTING UP: 4
+TESTING DOWN: 0
+TESTING LOCAL: 1
+This is route compute XYZ
+This is outport compute XYZ
+exiting

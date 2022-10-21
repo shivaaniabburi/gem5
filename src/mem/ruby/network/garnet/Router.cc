@@ -38,6 +38,9 @@
 #include "mem/ruby/network/garnet/InputUnit.hh"
 #include "mem/ruby/network/garnet/NetworkLink.hh"
 #include "mem/ruby/network/garnet/OutputUnit.hh"
+//#include "mem/ruby/network/garnet/RoutingUnit.hh"
+
+
 
 namespace gem5
 {
@@ -158,11 +161,50 @@ Router::getInportDirection(int inport)
     return m_input_unit[inport]->get_direction();
 }
 
+// int GarnetNetwork::getRoutingAlgo()
+// {
+//     return getRoutingAlgorithm();
+// }
+
 int
 Router::route_compute(RouteInfo route, int inport, PortDirection inport_dirn)
 {
+ //  int x = getRoutingAlgo();
+
+
+ int x=2;
+    if(x==2)
+    {
+        std::cout<<"This is route compute XYZ"<<std::endl;
+return routingUnit.outportComputeXYZ(route, inport, inport_dirn);
+
+    }
+    else if (x== 1)
+    {
+std::cout<<"This is route compute XY"<<std::endl;
+return routingUnit.outportComputeXY(route, inport, inport_dirn);
+    }
+
+
+std::cout<<"This is route compute"<<std::endl;
     return routingUnit.outportCompute(route, inport, inport_dirn);
 }
+
+
+
+// int
+// Router::route_compute_XY(RouteInfo route, int inport, PortDirection inport_dirn)
+// {
+// std::cout<<"This is route compute XY"<<std::endl;
+// return routingUnit.outportComputeXY(route, inport, inport_dirn);
+// }
+
+// int
+// Router::route_compute_XYZ(RouteInfo route, int inport, PortDirection inport_dirn)
+// {
+// std::cout<<"This is route compute XYZ"<<std::endl;
+// return routingUnit.outportComputeXYZ(route, inport, inport_dirn);
+// }
 
 void
 Router::grant_switch(int inport, flit *t_flit)

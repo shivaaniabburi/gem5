@@ -27,7 +27,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "mem/ruby/network/garnet/RoutingUnit.hh"
 
 #include "base/cast.hh"
@@ -169,6 +170,7 @@ int
 RoutingUnit::outportCompute(RouteInfo route, int inport,
                             PortDirection inport_dirn)
 {
+std::cout<<"This is outportCompute"<<std::endl;
     int outport = -1;
 
     if (route.dest_router == m_router->get_id()) {
@@ -196,7 +198,7 @@ RoutingUnit::outportCompute(RouteInfo route, int inport,
         default: outport =
             lookupRoutingTable(route.vnet, route.net_dest); break;
     }
-
+std::cout<<"ouport ="<<outport<<std::endl;
     assert(outport != -1);
     return outport;
 }
@@ -209,6 +211,7 @@ RoutingUnit::outportComputeXY(RouteInfo route,
                               int inport,
                               PortDirection inport_dirn)
 {
+std::cout<<"This is outport compute XY"<<std::endl;
     PortDirection outport_dirn = "Unknown";
 
     [[maybe_unused]] int num_rows = m_router->get_net_ptr()->getNumRows();
@@ -216,13 +219,27 @@ RoutingUnit::outportComputeXY(RouteInfo route,
     assert(num_rows > 0 && num_cols > 0);
 
     int my_id = m_router->get_id();
+
+    std::cout<<"num_cols= "<<num_cols<<std::endl;
+    std::cout<<"my_id= "<<my_id<<std::endl;
     int my_x = my_id % num_cols;
     int my_y = my_id / num_cols;
+    std::cout<<"my_x= "<<my_x<<std::endl;
+    std::cout<<"my_y= "<<my_y<<std::endl;
 
     int dest_id = route.dest_router;
+    std::cout<<"dest_id="<<dest_id<<std::endl;
+
     int dest_x = dest_id % num_cols;
     int dest_y = dest_id / num_cols;
+std::cout<<"dest_x="<<dest_x<<std::endl;
+std::cout<<"dest_y= "<<dest_y<<std::endl;
 
+// if((dest_x== my_x) || (dest_y == my_y))
+// {
+//     std::cout<<"dest == my so exit"<<std::endl;
+//     exit(0);
+// }
     int x_hops = abs(dest_x - my_x);
     int y_hops = abs(dest_y - my_y);
 
@@ -230,8 +247,13 @@ RoutingUnit::outportComputeXY(RouteInfo route,
     bool y_dirn = (dest_y >= my_y);
 
     // already checked that in outportCompute() function
-    assert(!(x_hops == 0 && y_hops == 0));
-
+    std::cout<<"xhops"<<x_hops<<"yhops"<<y_hops<<std::endl;
+  // assert(!(x_hops == 0 && y_hops == 0));
+   if((x_hops == 0 && y_hops == 0))
+{
+    std::cout<<"abort"<<std::endl;
+   exit(0);
+}
     if (x_hops > 0) {
         if (x_dirn) {
             assert(inport_dirn == "Local" || inport_dirn == "West");
@@ -250,13 +272,17 @@ RoutingUnit::outportComputeXY(RouteInfo route,
             assert(inport_dirn != "South");
             outport_dirn = "South";
         }
-    } else {
-        // x_hops == 0 and y_hops == 0
-        // this is not possible
-        // already checked that in outportCompute() function
-        panic("x_hops == y_hops == 0");
     }
+     else {
+    //     // x_hops == 0 and y_hops == 0
+    //     // this is not possible
+    //     // already checked that in outportCompute() function
+       panic("x_hops == y_hops == 0");
+ }
 
+    std::cout<<"This is outportComputeXY"<<std::endl;
+    std::cout<<"m_outports_dirn2idx[outport_dirn]"<<m_outports_dirn2idx[outport_dirn]<<std::endl;
+    
     return m_outports_dirn2idx[outport_dirn];
 }
 
@@ -268,6 +294,93 @@ RoutingUnit::outportComputeCustom(RouteInfo route,
                                  PortDirection inport_dirn)
 {
     panic("%s placeholder executed", __FUNCTION__);
+}
+
+int
+RoutingUnit::outportComputeXYZ(RouteInfo route,
+                              int inport,
+                              PortDirection inport_dirn)
+{
+std::cout<<"This is outport compute XYZ"<<std::endl;
+    PortDirection outport_dirn = "Unknown";
+    // cout<<"File: RoutingUnit.cc"<<endl;
+    // cout<<"Starting ComputeZYX"<<endl;
+    // cout<<"Came from: "<<inport_dirn<<"\n"<<endl;
+
+    int num_rows = m_router->get_net_ptr()->getNumRows();
+    int num_cols = m_router->get_net_ptr()->getNumCols();
+    int z_depth = m_router->get_net_ptr()->getZDepth();
+    assert(num_rows > 0 && num_cols > 0 && z_depth > 0);
+
+    int my_id = m_router->get_id();
+    int my_z = (my_id/(num_rows*num_cols));
+    int my_x = (my_id-(my_z*num_rows*num_cols)) % num_cols;
+    int my_y = (my_id-(my_z*num_rows*num_cols)) / num_cols;
+    // cout<<"Current Coordinates: ("<<my_z<<","<<my_y<<","<<my_x<<")"<<endl;
+
+    int dest_id = route.dest_router;
+    int dest_z = (dest_id/(num_rows*num_cols));
+    int dest_x = (dest_id-(dest_z*num_rows*num_cols)) % num_cols;
+    int dest_y = (dest_id-(dest_z*num_rows*num_cols)) / num_cols;
+
+    int x_hops = abs(dest_x - my_x);
+    int y_hops = abs(dest_y - my_y);
+    int z_hops = abs(dest_z - my_z);
+
+    bool x_dirn = (dest_x >= my_x); //true if destination is east of current
+    bool y_dirn = (dest_y >= my_y); //true if destination is north of current
+    bool z_dirn = (dest_z >= my_z); //true if destination is above current
+
+    // already checked that in outportCompute() function
+    //assert(!(x_hops == 0 && y_hops == 0 && z_hops == 0));
+    if((x_hops == 0 && y_hops == 0 && z_hops == 0))
+    {
+        std::cout<<"exiting"<<std::endl;
+        exit(0);
+    }
+
+    if (x_hops > 0) {
+        if (x_dirn) {
+            assert(inport_dirn == "Local" || inport_dirn == "West");
+            outport_dirn = "East";
+        } else {
+            assert(inport_dirn == "Local" || inport_dirn == "East");
+            outport_dirn = "West";
+        }
+    } else if (y_hops > 0) {
+        if (y_dirn) {
+            assert(inport_dirn != "North");
+            outport_dirn = "North";
+        } else {
+            assert(inport_dirn != "South");
+            outport_dirn = "South";
+        }
+    } else if (z_hops > 0) {
+        if (z_dirn) {
+            assert(inport_dirn != "Up");
+            outport_dirn = "Up";
+        } else {
+            assert(inport_dirn != "Down");
+            outport_dirn = "Down";
+        }
+    } else {
+        // x_hops == 0 and y_hops == 0 and z_hops == 0
+        // this is not possible
+        // already checked that in outportCompute() function
+        panic("x_hops == y_hops == z_hops == 0");
+    }
+    // cout<<"Going: "<<outport_dirn<<endl;
+    // cout<<"Finished ComputeZYX"<<endl;
+
+    std::cout<<"TESTING NORTH: "<<m_outports_dirn2idx["North"]<<std::endl;
+    std::cout<<"TESTING SOUTH: "<<m_outports_dirn2idx["South"]<<std::endl;
+    std::cout<<"TESTING EAST: "<<m_outports_dirn2idx["East"]<<std::endl;
+    std::cout<<"TESTING WEST: "<<m_outports_dirn2idx["West"]<<std::endl;
+    std::cout<<"TESTING UP: "<<m_outports_dirn2idx["Up"]<<std::endl;
+    std::cout<<"TESTING DOWN: "<<m_outports_dirn2idx["Down"]<<std::endl;
+    std::cout<<"TESTING LOCAL: "<<m_outports_dirn2idx["Local"]<<std::endl;
+
+    return m_outports_dirn2idx[outport_dirn];
 }
 
 } // namespace garnet

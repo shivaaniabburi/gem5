@@ -104,6 +104,8 @@ class ListPlatform(argparse.Action):
 
 def addNoISAOptions(parser):
     parser.add_argument("-n", "--num-cpus", type=int, default=1)
+    
+    #parser.add_argument("-n", "--X", type=int, default=1)
     parser.add_argument("--sys-voltage", action="store", type=str,
                         default='1.0V',
                         help="""Top-level voltage for blocks running at system
